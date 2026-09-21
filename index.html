@@ -3,9 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dam</title>
+    <title>RetroOS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="computer">
+        <div class="top">
+            <div class="logo">RETRO<span>OS</span></div>
+            <div id="clock">12:00:00</div>
+        </div>
+
+        <div class="screen">
+            <div class="desktop">
+
+                <div class="icon" ondblclick="openWindow('computer')">
+                    <div class="icon-img">▣</div>
+                    <p>My Computer</p>
+                </div>
+
+                <div class="icon" ondblclick="openWindow('browser')">
+                    <div class="icon-img">◎</div>
+                    <p>Web Browser</p>
+                </div>
+
+                <div class="icon" ondblclick="openWindow('notes')">
+                    <div class="icon-img">▤</div>
+                    <p>Notepad</p>
+                </div>
+
+                <div class="icon" ondblclick="openWindow('calculator')">
+                    <div class="icon-img">＋</div>
+                    <p>Calculator</p>
+                </div>
+
+                <div class="icon" ondblclick="openWindow('terminal')">
+                    <div class="icon-img">&gt;_</div>
+                    <p>Terminal</p>
+                </div>
+
+                <div class="icon" ondblclick="openWindow('about')">
+                    <div class="icon-img">?</div>
+                    <p>About</p>
+                </div>
+
+                <div class="window" id="computer">
+                    <div class="title-bar">
+                        <span>MY COMPUTER</span>
+                        <div class="window-buttons">
+                            <button onclick="minimizeWindow('computer')">_</button>
+                            <button onclick="closeWindow('computer')">X</button>
+                        </div>
+                    </div>
+                    <div class="window-body">
+                        <h2>MY COMPUTER</h2>
+                        <hr>
+                        <p>Local Disk (C:)</p>
+                        <div class="drive">████████████████░░░░ 80%</div>
+                        <p>Memory: 640 KB</p>
+                        <p>Processor: 8086 @ 4.77 MHz</p>
+                        <p>Operating System: RetroOS 1.0</p>
+                    </div>
+                </div>
+
+                <div class="window browser-window" id="browser">
+                    <div class="title-bar drag-bar">
+                        <span>RETRO WEB BROWSER</span>
+                        <div class="window-buttons">
+                            <button onclick="minimizeWindow('browser')">_</button>
+                            <button onclick="closeWindow('browser')">X</button>
+                        </div>
+                    </div>
+
+                    <div class="browser-toolbar">
+                        <button onclick="browserBack()">◀</button>
+                        <button onclick="browserForward()">▶</button>
+                        <button onclick="browserReload()">↻</button>
+
+                        <input
+                            id="addressBar"
+                            value="https://www.google.com"
+                            placeholder="ENTER WEB ADDRESS"
+                            onkeydown="browserEnter(event)"
+                        >
+
+                        <button onclick="goToAddress()">GO</button>
+                    </div>
+
+                    <div class="browser-links">
+                        <button onclick="goToSite('https://www.google.com/webhp?igu=1')">GOOGLE</button>
+                        <button onclick="goToSite('https://www.wikipedia.org')">WIKIPEDIA</button>
+                        <button onclick="goToSite('https://www.youtube.com')">YOUTUBE</button>
+                        <button onclick="goToSite('https://www.openstreetmap.org/export/embed.html')">MAP</button>
+                    </div>
+
+                    <iframe
+                        id="browserFrame"
+                        src="https://www.google.com/webhp?igu=1"
+                        title="Retro Browser">
+                    </iframe>
+
+                    <div class="browser-bottom">
+                        <span id="browserStatus">READY</span>
+                    </div>
+                </div>
+
+                <div class="window" id="notes">
+                    <div class="title-bar">
+                        <span>NOTEPAD</span>
+                        <div class="window-buttons">
+                            <button onclick="minimizeWindow('notes')">_</button>
+                            <button onclick="closeWindow('notes')">X</button>
+                        </div>
+                    </div>
+
+                    <div class="window-body notes-body">
+                        <textarea placeholder="Type something..."></textarea>
+                    </div>
+                </div>
+
+                <div class="window calculator-window" id="calculator">
+                    <div class="title-bar">
+                        <span>CALCULATOR</span>
+                        <div class="window-buttons">
+                            <button onclick="minimizeWindow('calculator')">_</button>
+                            <button onclick="closeWindow('calculator')">X</button>
+                        </div>
+                    </div>
+
+                    <div class="calculator">
+                        <input id="calcDisplay" readonly>
+
+                        <div class="calc-buttons">
+                            <button onclick="calcInput('7')">7</button>
+                            <button onclick="calcInput('8')">8</button>
+                            <button onclick="calcInput('9')">9</button>
+                            <button onclick="calcInput('/')">/</button>
+
+                            <button onclick="calcInput('4')">4</button>
+                            <button onclick="calcInput('5')">5</button>
+                            <button onclick="calcInput('6')">6</button>
+                            <button onclick="calcInput('*')">*</button>
+
+                            <button onclick="calcInput('1')">1</button>
+                            <button onclick="calcInput('2')">2</button>
+                            <button onclick="calcInput('3')">3</button>
+                            <button onclick="calcInput('-')">-</button>
+
+                            <button onclick="calcInput('0')">0</button>
+                            <button onclick="calcInput('.')">.</button>
+                            <button onclick="calculate()">=</button>
+                            <button onclick="calcInput('+')">+</button>
+
+                            <button class="clear-calc" onclick="clearCalc()">CLEAR</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="window terminal-window" id="terminal">
+                    <div class="title-bar">
+                        <span>COMMAND.COM</span>
+                        <div class="window-buttons">
+                            <button onclick="minimizeWindow('terminal')">_</button>
+                            <button onclick="closeWindow('terminal')">X</button>
+                        </div>
+                    </div>
+
+                    <div class="terminal-body">
+                        <p>RETRO OS COMMAND LINE</p>
+                        <p>Type "help" for commands.</p>
+
+                        <div class="command-line">
+                            <span>C:\&gt;</span>
+                            <input id="commandInput" autocomplete="off">
+                        </div>
+
+                        <div id="commandOutput"></div>
+                    </div>
+                </div>
+
+                <div class="window" id="about">
+                    <div class="title-bar">
+                        <span>ABOUT RETROOS</span>
+                        <div class="window-buttons">
+                            <button onclick="minimizeWindow('about')">_</button>
+                            <button onclick="closeWindow('about')">X</button>
+                        </div>
+                    </div>
+
+                    <div class="window-body">
+                        <h2>RETRO OS</h2>
+                        <p>Version 1.0</p>
+                        <p>A tiny operating system inspired by computers from the 1980s.</p>
+                        <br>
+                        <p>Made with HTML, CSS and JavaScript.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="taskbar">
+                <button class="start-button" onclick="toggleStart()">START</button>
+
+                <div class="task-items" id="taskItems"></div>
+
+                <div class="system-time" id="taskClock">12:00</div>
+            </div>
+
+            <div class="start-menu" id="startMenu">
+                <div class="start-title">RETRO OS</div>
+
+                <button onclick="openWindow('computer'); toggleStart()">▣ My Computer</button>
+                <button onclick="openWindow('browser'); toggleStart()">◎ Web Browser</button>
+                <button onclick="openWindow('notes'); toggleStart()">▤ Notepad</button>
+                <button onclick="openWindow('calculator'); toggleStart()">＋ Calculator</button>
+                <button onclick="openWindow('terminal'); toggleStart()">&gt;_ Command</button>
+                <button onclick="openWindow('about'); toggleStart()">? About</button>
+
+                <hr>
+
+                <button onclick="shutdown()">■ Shut Down</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="scanlines"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
